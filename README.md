@@ -83,7 +83,7 @@ Partiendo de la base de datos `tiendaOnline` e insertando datos, diseñe las con
    FROM Pedidos 
    JOIN Clientes ON Pedidos.clienteId = Clientes.id 
    JOIN Usuarios ON Clientes.usuarioId = Usuarios.id 
-   WHERE TIMESTAMPDIFF(YEAR, Clientes.fechaNacimiento, CURDATE()) >= 18;
+   WHERE TIMESTAMPDIFF(YEAR, Clientes.fechaNacimiento, pedidos.fechaRealizacion) >= 18;
   ```
 </details>
 
