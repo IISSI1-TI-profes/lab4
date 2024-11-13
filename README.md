@@ -122,6 +122,30 @@ LIMIT 1;
    WHERE puedeVenderseAMenores = FALSE;
   ```
 </details>
+<details>
+<summary><b>Lista los clientes cuya mayoría de productos pedidos (en cantidad total de unidades) son aquellos no permitidos para menores de 18 años.</b></summary>
+
+  ```sql
+   SELECT c.id AS cliente_id, u.nombre, u.email
+FROM Clientes c
+JOIN Usuarios u ON c.usuarioId = u.id
+JOIN Pedidos p ON c.id = p.clienteId
+JOIN LineasPedido lp ON p.id = lp.pedidoId
+JOIN Productos pr ON lp.productoId = pr.id
+GROUP BY c.id
+HAVING 
+    (SELECT SUM(lp1.unidades)
+     FROM LineasPedido lp1
+     JOIN Productos pr1 ON lp1.productoId = pr1.id
+     JOIN Pedidos p1 ON lp1.pedidoId = p1.id
+     WHERE p1.clienteId = c.id AND pr1.puedeVenderseAMenores = FALSE) >
+    (SELECT SUM(lp2.unidades)
+     FROM LineasPedido lp2
+     JOIN Productos pr2 ON lp2.productoId = pr2.id
+     JOIN Pedidos p2 ON lp2.pedidoId = p2.id
+     WHERE p2.clienteId = c.id AND pr2.puedeVenderseAMenores = TRUE);
+  ```
+</details>
 
 ---
 
