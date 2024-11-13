@@ -60,7 +60,7 @@ INSERT INTO LineasPedido (pedidoId, productoId, unidades, precio) VALUES
 (2, 9, 1, 59.99);    -- Tableta gráfica (permitido)
 
 
-
+-- Prueba para Clientes que han pedido en más de 3 meses distintos del último año uno de los 3 productos más vendidos de los últimos 5 años
 -- Insertar pedidos adicionales en diferentes meses para Cliente 1 y Cliente 2 dentro del último año
 INSERT INTO Pedidos (fechaRealizacion, fechaEnvio, direccionEntrega, comentarios, clienteId, empleadoId) VALUES
 ('2024-01-15', '2024-01-16', '123 Calle Principal', 'Pedido de enero', 1, 1),
@@ -83,3 +83,31 @@ INSERT INTO LineasPedido (pedidoId, productoId, unidades, precio) VALUES
 (8, 1, 1, 699.99),   -- Smartphone (Cliente 2 en febrero)
 (9, 3, 2, 9.99),     -- Libro Electrónico (Cliente 2 en abril)
 (10, 2, 1, 1200.00); -- Laptop (Cliente 2 en agosto) -- No cumple condición de más de 3 meses distintos
+
+
+-- Prueba para 5 pedidos con mayor importe de entre aquellos que tienen un importe menor a la media de pedidos
+-- Insertar pedidos adicionales para Cliente 1 y Cliente 2
+INSERT INTO Pedidos (fechaRealizacion, fechaEnvio, direccionEntrega, comentarios, clienteId, empleadoId) VALUES
+('2024-09-01', '2024-09-02', '123 Calle Principal', 'Pedido con importe bajo', 1, 1),
+('2024-09-10', '2024-09-12', '123 Calle Principal', 'Pedido con importe medio', 1, 1),
+('2024-09-15', '2024-09-16', '456 Avenida Secundaria', 'Pedido con importe alto', 2, NULL),
+('2024-09-20', '2024-09-22', '456 Avenida Secundaria', 'Otro pedido con importe bajo', 2, NULL),
+('2024-09-25', '2024-09-26', '123 Calle Principal', 'Pedido adicional con importe medio', 1, 1);
+
+-- Insertar líneas de pedido para los pedidos adicionales con distintos importes
+INSERT INTO LineasPedido (pedidoId, productoId, unidades, precio) VALUES
+(11, 5, 1, 15.99),      -- Pedido 11, Importe bajo (15.99)
+(11, 8, 2, 29.99),      -- Pedido 11, Importe total = 75.97
+
+(12, 1, 1, 699.99),     -- Pedido 12, Importe medio (699.99)
+(12, 5, 1, 15.99),      -- Pedido 12, Importe total = 715.98
+
+(13, 2, 1, 1200.00),    -- Pedido 13, Importe alto (1200.00)
+(13, 3, 3, 9.99),       -- Pedido 13, Importe total = 1229.97
+
+(14, 8, 1, 29.99),      -- Pedido 14, Importe bajo (29.99)
+(14, 9, 2, 85.99),      -- Pedido 14, Importe total = 201.97
+
+(15, 1, 1, 699.99),     -- Pedido 15, Importe medio (699.99)
+(15, 5, 1, 15.99),      -- Pedido 15, Importe total = 715.98
+
