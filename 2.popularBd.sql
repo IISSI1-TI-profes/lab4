@@ -2,12 +2,15 @@
 INSERT INTO Usuarios (email, contraseña, nombre) VALUES
 ('cliente1@example.com', 'password123', 'Cliente Uno'),
 ('empleado1@example.com', 'password123', 'Empleado Uno'),
-('cliente2@example.com', 'password123', 'Cliente Dos');
+('cliente2@example.com', 'password123', 'Cliente Dos'),
+('empleado2@example.com', 'password123', 'Empleado Dos');
 
 -- Insertar datos en la tabla Empleados
 -- El usuarioId corresponde al segundo usuario, que es un empleado
 INSERT INTO Empleados (usuarioId, salario) VALUES
 (2, 35000.00);
+INSERT INTO Empleados (usuarioId, salario) VALUES
+(4, 40000.00);
 
 -- Insertar datos en la tabla Clientes
 -- Corresponde a los usuarios cliente
@@ -37,14 +40,18 @@ INSERT INTO Productos (nombre, descripción, precio, tipoProductoId, puedeVender
 -- Insertar datos en la tabla Pedidos
 INSERT INTO Pedidos (fechaRealizacion, fechaEnvio, direccionEntrega, comentarios, clienteId, empleadoId) VALUES
 ('2024-10-01', '2024-10-03', '123 Calle Principal', 'Entregar en la puerta', 1,  1),
-('2024-10-02', NULL, '456 Avenida Secundaria', 'Entregar en recepción', 2, NULL);
+('2024-10-02', NULL, '456 Avenida Secundaria', 'Entregar en recepción', 2, NULL),
+('2010-06-01', '2010-06-03', '123 Calle VeteTuASaber', 'Cliente con movilidad reducida', 1,  2);
 
 -- Insertar datos en la tabla LineasPedido - Conjunto de inserciones correctas
 -- Productos permitidos para todos los clientes
 INSERT INTO LineasPedido (pedidoId, productoId, unidades, precio) VALUES
 (1, 1, 1, 699.99),   -- Smartphone (permitido)
 (1, 5, 2, 15.99),    -- Camiseta (permitido)
-(1, 3, 1, 9.99);     -- Libro Electrónico (permitido)
+(1, 3, 1, 9.99),     -- Libro Electrónico (permitido)
+(3, 2, 1, 1100.00),   -- Laptop (permitido)
+(3, 8, 2, 29.99),    -- Audífono (permitido)
+(3, 9, 1, 12.99);     -- Tableta (permitido)
 
 -- Insertar datos en la tabla LineasPedido - Conjunto de inserciones correctas
 -- Productos permitidos para todos los clientes
