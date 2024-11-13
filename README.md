@@ -137,7 +137,7 @@ Partiendo de la base de datos `tiendaOnline` e insertando datos, diseñe las con
 </details>
 
 <details>
-<summary><b>Lista los productos que no tienen pedidos asociados en `LineasPedido`.</b></summary>
+<summary><b>Lista los productos que no se han vendido.</b></summary>
 
   ```sql
    SELECT Productos.nombre 
@@ -147,4 +147,18 @@ Partiendo de la base de datos `tiendaOnline` e insertando datos, diseñe las con
   ```
 </details>
 
+<details>
+<summary><b>Ganancias mensuales obtenidas.</b></summary>
+
+  ```sql
+   SELECT MONTH(pedidos.fechaRealizacion) AS Mes, SUM(LineasPedido.precio * LineasPedido.unidades) AS total_precio 
+   FROM Pedidos 
+   JOIN LineasPedido ON Pedidos.id = LineasPedido.pedidoId
+   GROUP BY MONTH(pedidos.fechaRealizacion);
+  ```
+</details>
+
+
 ---
+
+
