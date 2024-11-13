@@ -158,6 +158,20 @@ Partiendo de la base de datos `tiendaOnline` e insertando datos, diseñe las con
   ```
 </details>
 
+<details>
+<summary><b>Empleado que ha gestionado más dinero.</b></summary>
+
+  ```sql
+SELECT usuarios.nombre AS Empleado, SUM(lineaspedido.precio * lineaspedido.unidades) AS dinero
+FROM empleados 
+	JOIN usuarios ON empleados.usuarioId=usuarios.id
+	JOIN pedidos ON pedidos.empleadoId=empleados.id
+	JOIN lineaspedido ON lineaspedido.pedidoId=pedidos.id
+GROUP BY empleados.id
+ORDER BY dinero DESC
+LIMIT 1;
+  ```
+</details>
 
 ---
 
