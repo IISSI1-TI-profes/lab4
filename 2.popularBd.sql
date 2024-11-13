@@ -58,3 +58,28 @@ INSERT INTO LineasPedido (pedidoId, productoId, unidades, precio) VALUES
 INSERT INTO LineasPedido (pedidoId, productoId, unidades, precio) VALUES
 (2, 8, 1, 29.99),    -- Audífonos (permitido)
 (2, 9, 1, 59.99);    -- Tableta gráfica (permitido)
+
+
+
+-- Insertar pedidos adicionales en diferentes meses para Cliente 1 y Cliente 2 dentro del último año
+INSERT INTO Pedidos (fechaRealizacion, fechaEnvio, direccionEntrega, comentarios, clienteId, empleadoId) VALUES
+('2024-01-15', '2024-01-16', '123 Calle Principal', 'Pedido de enero', 1, 1),
+('2024-03-10', '2024-03-11', '123 Calle Principal', 'Pedido de marzo', 1, 1),
+('2024-05-20', '2024-05-21', '123 Calle Principal', 'Pedido de mayo', 1, 1),
+('2024-07-05', '2024-07-06', '123 Calle Principal', 'Pedido de julio', 1, 1),  -- Pedido adicional para cumplir condición
+
+('2024-02-15', '2024-02-16', '456 Avenida Secundaria', 'Pedido de febrero', 2, NULL),
+('2024-04-10', '2024-04-11', '456 Avenida Secundaria', 'Pedido de abril', 2, NULL),
+('2024-08-20', '2024-08-21', '456 Avenida Secundaria', 'Pedido de agosto', 2, NULL); -- Otro cliente sin cumplir
+
+
+-- Insertar líneas de pedido adicionales para los pedidos recientes en diferentes meses
+INSERT INTO LineasPedido (pedidoId, productoId, unidades, precio) VALUES
+(4, 1, 1, 699.99),   -- Smartphone (Cliente 1 en enero)
+(5, 1, 1, 699.99),   -- Smartphone (Cliente 1 en marzo)
+(6, 2, 1, 1200.00),  -- Laptop (Cliente 1 en mayo)
+(7, 3, 1, 9.99),     -- Libro Electrónico (Cliente 1 en julio) -- Cumple condición
+
+(8, 1, 1, 699.99),   -- Smartphone (Cliente 2 en febrero)
+(9, 3, 2, 9.99),     -- Libro Electrónico (Cliente 2 en abril)
+(10, 2, 1, 1200.00); -- Laptop (Cliente 2 en agosto) -- No cumple condición de más de 3 meses distintos
