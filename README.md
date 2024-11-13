@@ -72,6 +72,21 @@ Partiendo de la base de datos `tiendaOnline` e insertando datos, diseñe las con
   ```
 </details>
 
+<details>
+<summary><b>Cliente que ha pedido la menor variedad de productos.</b></summary>
+
+  ```sql
+SELECT Usuarios.nombre AS cliente, COUNT(DISTINCT lp.productoId) AS numero_productos_distintos
+FROM Clientes c
+JOIN Pedidos p ON c.id = p.clienteId
+JOIN LineasPedido lp ON p.id = lp.pedidoId
+JOIN Usuarios u ON c.usuarioId = u.id;
+GROUP BY c.id, c.nombre
+ORDER BY numero_productos_distintos ASC
+LIMIT 1;
+  ```
+</details>
+
 ---
 
 ### 3. Consultas con JOIN y filtrado avanzado
