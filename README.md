@@ -209,6 +209,28 @@ LIMIT 5;
   ```
 </details>
 
+<details>
+<summary><b>Clientes que han pedido en más de 3 meses distintos del último año uno de los 3 productos más vendidos de los últimos 5 años.</b></summary>
+
+  ```sql
+SELECT DISTINCT p.clienteId
+FROM Pedidos p
+JOIN LineasPedido lp ON p.id = lp.pedidoId
+JOIN (
+    SELECT productoId
+    FROM LineasPedido
+    JOIN Pedidos ON LineasPedido.pedidoId = Pedidos.id
+    WHERE Pedidos.fechaRealizacion >= DATE_SUB(CURDATE(), INTERVAL 5 YEAR)
+    GROUP BY productoId
+    ORDER BY SUM(unidades) DESC
+    LIMIT 3
+) AS topProductos ON lp.productoId = topProductos.productoId
+WHERE p.fechaRealizacion >= DATE_FORMAT(CURDATE(), '%Y-01-01')
+GROUP BY p.clienteId, lp.productoId
+HAVING COUNT(DISTINCT DATE_FORMAT(p.fechaRealizacion, '%Y-%m')) >= 3;
+  ```
+</details>
+
 ---
 
 
