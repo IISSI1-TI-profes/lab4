@@ -103,6 +103,24 @@ LIMIT 1;
 </details>
 
 <details>
+<details>
+<summary><b>Encuentra los productos que no han sido pedidos por ningún cliente menor de 18 años.</b></summary>
+
+  ```sql
+   SELECT pr.id AS producto_id, pr.nombre
+FROM Productos pr
+WHERE pr.id NOT IN (
+    SELECT lp.productoId
+    FROM LineasPedido lp
+    JOIN Pedidos p ON lp.pedidoId = p.id
+    JOIN Clientes c ON p.clienteId = c.id
+    WHERE TIMESTAMPDIFF(YEAR, c.fechaNacimiento, CURDATE()) < 18
+);
+
+  ```
+</details>
+
+<details>	
 <summary><b>Muestra los pedidos y las líneas de pedido asociadas, incluyendo el nombre del producto y las unidades solicitadas.</b></summary>
 
   ```sql
