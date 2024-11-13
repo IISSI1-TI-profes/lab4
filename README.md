@@ -187,6 +187,28 @@ HAVING dinero > 1000.00;
   ```
 </details>
 
+<details>
+<summary><b>5 pedidos con mayor importe de entre aquellos que tienen un importe menor a la media de pedidos.</b></summary>
+
+  ```sql
+SELECT p.id AS pedidoId, SUM(lp.unidades * lp.precio) AS importeTotal
+FROM Pedidos p
+JOIN LineasPedido lp ON p.id = lp.pedidoId
+GROUP BY p.id
+HAVING importeTotal < (
+    SELECT AVG(total_importe)
+    FROM (
+        SELECT SUM(lp2.unidades * lp2.precio) AS total_importe
+        FROM Pedidos p2
+        JOIN LineasPedido lp2 ON p2.id = lp2.pedidoId
+        GROUP BY p2.id
+    ) AS importes
+)
+ORDER BY importeTotal DESC
+LIMIT 5;
+  ```
+</details>
+
 ---
 
 
