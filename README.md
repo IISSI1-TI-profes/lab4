@@ -103,7 +103,6 @@ LIMIT 1;
 </details>
 
 <details>
-<details>
 <summary><b>Encuentra los productos que no han sido pedidos por ningún cliente menor de 18 años.</b></summary>
 
   ```sql
