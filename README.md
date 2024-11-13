@@ -213,8 +213,10 @@ LIMIT 5;
 <summary><b>Clientes que han pedido en más de 3 meses distintos del último año uno de los 3 productos más vendidos de los últimos 5 años.</b></summary>
 
   ```sql
-SELECT DISTINCT p.clienteId
-FROM Pedidos p
+SELECT c.nombre, c.fechaNacimiento, u.email
+FROM Clientes c
+JOIN Usuarios u ON c.usuarioId = u.id
+JOIN Pedidos p ON c.id = p.clienteId
 JOIN LineasPedido lp ON p.id = lp.pedidoId
 JOIN (
     SELECT productoId
@@ -226,7 +228,7 @@ JOIN (
     LIMIT 3
 ) AS topProductos ON lp.productoId = topProductos.productoId
 WHERE p.fechaRealizacion >= DATE_FORMAT(CURDATE(), '%Y-01-01')
-GROUP BY p.clienteId, lp.productoId
+GROUP BY c.id
 HAVING COUNT(DISTINCT DATE_FORMAT(p.fechaRealizacion, '%Y-%m')) >= 3;
   ```
 </details>
