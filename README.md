@@ -264,7 +264,7 @@ HAVING dinero > 1000.00;
 </details>
 
 <details>
-<summary><b>5 pedidos con mayor importe de entre aquellos que tienen un importe menor a la media de pedidos.</b></summary>
+<summary><b>5 pedidos con mayor importe de entre aquellos que tienen un importe menor al importe medio de todos los pedidos.</b></summary>
 
   ```sql
 SELECT p.id AS pedidoId, SUM(lp.unidades * lp.precio) AS importeTotal
@@ -282,6 +282,19 @@ HAVING importeTotal < (
 )
 ORDER BY importeTotal DESC
 LIMIT 5;
+  ```
+</details>
+
+<details>
+<summary><b>Vista para facilitar la creación de consultas sobre importes de pedidos y empleados encargados.</b></summary>
+
+  ```sql
+CREATE OR REPLACE VIEW v_importes_pedidos AS
+SELECT pedidos.id AS pedidoId, empleados.id AS empleadoId, SUM(lineaspedido.unidades * lineaspedido.precio) AS total_importe
+FROM pedidos 
+	JOIN lineaspedido ON pedidos.id = lineaspedido.pedidoId
+	JOIN empleados ON empleados.id=pedidos.empleadoId
+GROUP BY pedidos.id;
   ```
 </details>
 
