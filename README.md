@@ -137,7 +137,7 @@ Partiendo de la base de datos `tiendaOnline` e insertando datos, diseñe las con
 </details>
 
 <details>
-<summary><b>Muestra los pedidos cuyo importe sea el máximo. Si hay más de un pedido con el mismo importe máximo, devolverlos totods.</b></summary>
+<summary><b>Muestra los pedidos cuyo importe sea el máximo. Si hay más de un pedido con el mismo importe máximo, devolverlos todos.</b></summary>
 
   ```sql
    SELECT 
