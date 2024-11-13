@@ -137,6 +137,26 @@ Partiendo de la base de datos `tiendaOnline` e insertando datos, diseñe las con
 </details>
 
 <details>
+<summary><b>Muestra los pedidos cuyo importe sea el máximo. Si hay más de un pedido con el mismo importe máximo, devolverlos totods.</b></summary>
+
+  ```sql
+   SELECT 
+    Pedidos.id AS pedido_id, 
+    SUM(LineasPedido.precio * LineasPedido.unidades) AS total_precio,
+    (SELECT MAX(t.total) 
+     FROM (SELECT SUM(lp.precio * lp.unidades) AS total
+           FROM Pedidos p
+           JOIN LineasPedido lp ON p.id = lp.pedidoId
+           GROUP BY p.id) AS t) AS importe_maximo
+FROM Pedidos
+JOIN LineasPedido ON Pedidos.id = LineasPedido.pedidoId 
+GROUP BY Pedidos.id
+HAVING total_precio = importe_maximo;
+  ```
+</details>
+
+
+<details>
 <summary><b>Lista los productos que no se han vendido.</b></summary>
 
   ```sql
